@@ -15,7 +15,8 @@ end
 
 def prompt_user
   # code #prompt_user here
-  puts "Type 'h' to hit or 's' to stay"
+  1.times do puts "Type 'h' to hit or 's' to stay"
+end
 end
 
 def get_user_input
@@ -38,18 +39,18 @@ end
   end
 
 
-def hit?(dongs)
+def hit?(integer)
   # code hit? here
   prompt_user
 case get_user_input
   when "h"
-    deal_card + dongs
+    deal_card + integer
   when "s"
-   prompt_user
+    #noop
   else
     invalid_command
 end
-dongs
+integer
 end
 
 
@@ -66,4 +67,8 @@ def runner
   # code runner here
   welcome
   initial_round
+  prompt_user
+  get_user_input
+  hit?
+  display_card_total
 end
