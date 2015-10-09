@@ -5,7 +5,7 @@ end
 
 def deal_card
   # code #deal_card here
-  return 1 + rand(10) 
+  rand(1..11) 
 end
 
 def display_card_total(card_total)
@@ -15,13 +15,12 @@ end
 
 def prompt_user
   # code #prompt_user here
-  1.times do puts "Type 'h' to hit or 's' to stay"
-end
+  puts "Type 'h' to hit or 's' to stay"
 end
 
 def get_user_input
   # code #get_user_input here
-    gets.chomp
+    gets.chomp.strip
 end
 
 def end_game(game_total)
@@ -31,32 +30,30 @@ end
 
 def initial_round
   # code #initial_round here
-  total = deal_card + deal_card
-  display_card_total(total)
-  2.times do deal_card
-  return total
-end
+  first_round = deal_card + deal_card
+  display_card_total(first_round)
+  return first_round
   end
 
 
-def hit?(integer)
+def hit?(card_total)
   # code hit? here
-  prompt_user
-case get_user_input
-  when "h"
-    deal_card + integer
-  when "s"
-    #noop
+prompt_user
+user_input = get_user_input
+  if user_input == "h"
+    card_total += deal_card
+  elsif user_input == "s"
+    card_total
   else
     invalid_command
-end
-integer
+  end
 end
 
 
 def invalid_command
   # code invalid_command here
   puts "Sorry, I don't understand."
+  get_user_input
 end
 
 #####################################################
@@ -66,9 +63,10 @@ end
 def runner
   # code runner here
   welcome
-  initial_round
-  prompt_user
-  get_user_input
-  hit?
-  display_card_total
+  card_total = initial_round
+  until card_total > 21
+  card_total = hit? (card_total)
+  display_card_total(card_total)
+end
+end_game(card_total)
 end
