@@ -77,11 +77,7 @@ describe "#hit?" do
     end
   end
 
-  it "calls on #prompt_user then #get_user_input" do
-    expect($stdout).to receive(:puts).with("Type 'h' to hit or 's' to stay")
-    expect(self).to receive(:get_user_input).and_return("s")
-    hit?(7)
-  end
+
 
   it "returns an integer which is the card total" do
     expect(self).to receive(:get_user_input).and_return("s")
